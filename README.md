@@ -4,9 +4,9 @@ This is a simple task manager service.
 
 # Setup Instruction
 
-git clone https://github.com/airtribe-projects/task-manager-api-godofgenai.git
-npm i
-npm run start
+git clone https://github.com/airtribe-projects/task-manager-api-godofgenai.git<br>
+npm i<br>
+npm run start<br>
 
 # Endpoint Details
 
