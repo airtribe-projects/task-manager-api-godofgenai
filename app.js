@@ -25,7 +25,7 @@ app.get('/tasks', (req, res) => {
 
 app.get('/tasks/:id', (req, res) => {
     const id = req.params.id;
-    if (!id) res.status(404).json({ message: 'Non existant id' });
+    if (id === null || id === undefined) return res.status(404).json({ message: 'Non existant id' });
     const tasks = task['tasks'];
     for (const task of tasks) {
         if (task.id == id) {
@@ -47,7 +47,7 @@ app.post('/tasks', (req, res) => {
 
 app.put('/tasks/:id', (req, res) => {
     const id = req.params.id;
-    if (!id) res.status(404).json({ message: 'Non existant id' });
+    if (id === null || id === undefined) return res.status(404).json({ message: 'Non existant id' });
     const payloadIsValid = validatePayload(req.body);
     console.log('payload is valid', payloadIsValid);
     if (!payloadIsValid) {
@@ -67,14 +67,14 @@ app.put('/tasks/:id', (req, res) => {
         return task;
     });
     if (!idFound) {
-        res.status(404).json({ message: 'Non existant id' });
+        return res.status(404).json({ message: 'Non existant id' });
     }
     res.json(task['tasks']);
 });
 
 app.delete('/tasks/:id', (req, res) => {
     const id = req.params.id;
-    if (!id) res.status(404).json({ message: 'Non existant id' });
+    if (id === null || id === undefined) return res.status(404).json({ message: 'Non existant id' });
     let idFound = false;
     let deletedData;
     task['tasks'] = task['tasks'].filter((task) => {
@@ -85,7 +85,7 @@ app.delete('/tasks/:id', (req, res) => {
         }
         return true;
     });
-    if (!idFound) res.status(404).json({ message: 'Non existant id' });
+    if (!idFound) return res.status(404).json({ message: 'Non existant id' });
     res.json(deletedData);
 });
 
